@@ -17,41 +17,41 @@
 
 /* Cal status types */
 typedef enum {
-	NEW  = 0,
-	DONE = 100,
+    NEW  = 0,
+    DONE = 100,
 } status_t;
 
 /* Calendar type */
 typedef struct cal_t {
-	char         *type;
-	char         *name;
-	char         *desc;
-	struct cal_t *next;
+    char         *type;
+    char         *name;
+    char         *desc;
+    struct cal_t *next;
 } cal_t;
 
 /* Calendar item types */
 typedef struct event_t {
-	char           *name;
-	char           *desc;
-	char           *loc;
-	char           *cat;
-	date_t          start;
-	date_t          end;
-	const cal_t    *cal;
-	struct event_t *next;
-	struct event_t *prev;
+    char           *name;
+    char           *desc;
+    char           *loc;
+    char           *cat;
+    date_t          start;
+    date_t          end;
+    const cal_t    *cal;
+    struct event_t *next;
+    struct event_t *prev;
 } event_t;
 
 typedef struct todo_t {
-	char          *name;
-	char          *desc;
-	char          *cat;
-	status_t       status;
-	date_t         start;
-	date_t         due;
-	cal_t         *cal;
-	struct todo_t *next;
-	struct todo_t *prev;
+    char          *name;
+    char          *desc;
+    char          *cat;
+    status_t       status;
+    date_t         start;
+    date_t         due;
+    cal_t         *cal;
+    struct todo_t *next;
+    struct todo_t *prev;
 } todo_t;
 
 /* Global data */

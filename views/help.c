@@ -23,7 +23,7 @@ static WINDOW *win;
 /* Help init */
 void help_init(WINDOW *_win)
 {
-	win = _win;
+    win = _win;
 }
 
 /* Help size */
@@ -34,11 +34,11 @@ void help_size(int rows, int cols)
 /* Help draw */
 void help_draw(void)
 {
-	mvwprintw(win, 0, 1, "%s\n", "help");
+    mvwprintw(win, 0, 1, "%s\n", "help");
 }
 
 /* Help run */
 int help_run(int key, mmask_t btn, int row, int col)
 {
-	return 0;
+    return 0;
 }

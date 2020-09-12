@@ -25,37 +25,37 @@ typedef int min_t;
 typedef int sec_t;
 
 typedef enum {
-	JAN =  0,
-	FEB =  1,
-	MAR =  2,
-	APR =  3,
-	MAY =  4,
-	JUN =  5,
-	JUL =  6,
-	AUG =  7,
-	SEP =  8,
-	OCT =  9,
-	NOV = 10,
-	DEC = 11,
+    JAN =  0,
+    FEB =  1,
+    MAR =  2,
+    APR =  3,
+    MAY =  4,
+    JUN =  5,
+    JUL =  6,
+    AUG =  7,
+    SEP =  8,
+    OCT =  9,
+    NOV = 10,
+    DEC = 11,
 } month_t;
 
 typedef enum {
-	SUN = 0,
-	MON = 1,
-	TUE = 2,
-	WED = 3,
-	THU = 4,
-	FRI = 5,
-	SAT = 6,
+    SUN = 0,
+    MON = 1,
+    TUE = 2,
+    WED = 3,
+    THU = 4,
+    FRI = 5,
+    SAT = 6,
 } wday_t;
 
 typedef struct {
-	year_t  year;
-	month_t month;
-	day_t   day;
-	hour_t  hour;
-	min_t   min;
-	sec_t   sec;
+    year_t  year;
+    month_t month;
+    day_t   day;
+    hour_t  hour;
+    min_t   min;
+    sec_t   sec;
 } date_t;
 
 /* Global data */

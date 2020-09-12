@@ -34,131 +34,131 @@ static FILE *debug_fd = NULL;
 /* Helper functions */
 static void message(FILE *output_fd, const char *prefix, const char *fmt, va_list ap)
 {
-	va_list tmp;
+    va_list tmp;
 
-	/* Log to standard out */
-	if (output_fd) {
-		va_copy(tmp, ap);
-		fprintf(output_fd, "%s: ", prefix);
-		vfprintf(output_fd, fmt, tmp);
-		fprintf(output_fd, "\n");
-	}
+    /* Log to standard out */
+    if (output_fd) {
+        va_copy(tmp, ap);
+        fprintf(output_fd, "%s: ", prefix);
+        vfprintf(output_fd, fmt, tmp);
+        fprintf(output_fd, "\n");
+    }
 
-	/* Log to debug file */
-	if (debug_fd) {
-		va_copy(tmp, ap);
-		fprintf(debug_fd, "%s: ", prefix);
-		vfprintf(debug_fd, fmt, tmp);
-		fprintf(debug_fd, "\n");
-	}
+    /* Log to debug file */
+    if (debug_fd) {
+        va_copy(tmp, ap);
+        fprintf(debug_fd, "%s: ", prefix);
+        vfprintf(debug_fd, fmt, tmp);
+        fprintf(debug_fd, "\n");
+    }
 
-	/* Log to status bar */
-	if (&COMPACT && stdscr) {
-		int rev = COMPACT ? A_BOLD : 0;
-		va_copy(tmp, ap);
-		if (!COMPACT)
-			mvhline(LINES-2, 0, ACS_HLINE, COLS);
-		move(LINES-1, 0);
-		attron(COLOR_PAIR(COLOR_ERROR) | rev);
-		vw_printw(stdscr, fmt, tmp);
-		attroff(COLOR_PAIR(COLOR_ERROR) | rev);
-		if (!COMPACT)
-			clrtoeol();
-	}
+    /* Log to status bar */
+    if (&COMPACT && stdscr) {
+        int rev = COMPACT ? A_BOLD : 0;
+        va_copy(tmp, ap);
+        if (!COMPACT)
+            mvhline(LINES-2, 0, ACS_HLINE, COLS);
+        move(LINES-1, 0);
+        attron(COLOR_PAIR(COLOR_ERROR) | rev);
+        vw_printw(stdscr, fmt, tmp);
+        attroff(COLOR_PAIR(COLOR_ERROR) | rev);
+        if (!COMPACT)
+            clrtoeol();
+    }
 }
 
 /* Initialize */
 void util_init(void)
 {
-	debug_fd = fopen("/tmp/lackey.log", "w+");
+    debug_fd = fopen("/tmp/lackey.log", "w+");
 }
 
 /* String functions */
 void strsub(char *str, char find, char repl)
 {
-	for (char *cur = str; *cur; cur++)
-		if (*cur == find)
-			*cur = repl;
+    for (char *cur = str; *cur; cur++)
+        if (*cur == find)
+            *cur = repl;
 }
 
 char *strcopy(const char *str)
 {
-	if (str == NULL)
-		return NULL;
-	return strdup(str);
+    if (str == NULL)
+        return NULL;
+    return strdup(str);
 }
 
 int match(const char *a, const char *b)
 {
-	if (a == b)
-		return 1;
-	if (!a || !b)
-		return 0;
-	return !strcmp(a, b);
+    if (a == b)
+        return 1;
+    if (!a || !b)
+        return 0;
+    return !strcmp(a, b);
 }
 
 /* Memory functions */
 void *alloc0(int size)
 {
-	void *data = calloc(1, size);
-	if (!data)
-		error("memory allocation failed");
-	return data;
+    void *data = calloc(1, size);
+    if (!data)
+        error("memory allocation failed");
+    return data;
 }
 
 /* File functions */
 char *read_file(const char *path, int *len)
 {
-	/* we could use stat, but we'll try to be portable */
-	FILE *fd = fopen(path, "rt+");
-	if (!fd)
-		return NULL;
+    /* we could use stat, but we'll try to be portable */
+    FILE *fd = fopen(path, "rt+");
+    if (!fd)
+        return NULL;
 
-	int   block = 512; // read size
-	int   size  = 512; // buffer size
-	int   slen  = 0;   // string length
-	char *buf   = malloc(size);
-	if (!buf)
-		goto err;
+    int   block = 512; // read size
+    int   size  = 512; // buffer size
+    int   slen  = 0;   // string length
+    char *buf   = malloc(size);
+    if (!buf)
+        goto err;
 
-	while (!feof(fd)) {
-		if (slen + block + 1 > size) {
-			size *= 2;
-			buf   = realloc(buf, size);
-			if (!buf)
-				goto err;
-		}
-		slen += fread(&buf[slen], 1, block, fd);
-		buf[slen] = '\0';
-	}
+    while (!feof(fd)) {
+        if (slen + block + 1 > size) {
+            size *= 2;
+            buf   = realloc(buf, size);
+            if (!buf)
+                goto err;
+        }
+        slen += fread(&buf[slen], 1, block, fd);
+        buf[slen] = '\0';
+    }
 
 err:
-	if (len)
-		*len = slen;
-	fclose(fd);
-	return buf;
+    if (len)
+        *len = slen;
+    fclose(fd);
+    return buf;
 }
 
 /* Debugging functions */
 void debug(char *fmt, ...)
 {
-	va_list ap;
-	va_start(ap, fmt);
-	message(NULL, "debug", fmt, ap);
-	va_end(ap);
+    va_list ap;
+    va_start(ap, fmt);
+    message(NULL, "debug", fmt, ap);
+    va_end(ap);
 }
 
 void error(char *fmt, ...)
 {
-	va_list ap;
-	va_start(ap, fmt);
-	fflush(stdout);
-	fflush(stderr);
-	message(stderr, "error", fmt, ap);
-	va_end(ap);
-	if (stdscr) {
-		getch();
-		endwin();
-	}
-	exit(-1);
+    va_list ap;
+    va_start(ap, fmt);
+    fflush(stdout);
+    fflush(stderr);
+    message(stderr, "error", fmt, ap);
+    va_end(ap);
+    if (stdscr) {
+        getch();
+        endwin();
+    }
+    exit(-1);
 }

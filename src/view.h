@@ -34,10 +34,10 @@
 
 /* Edit modes */
 typedef enum {
-	EDIT_NONE,
-	EDIT_CAL,
-	EDIT_EVENT,
-	EDIT_TODO,
+    EDIT_NONE,
+    EDIT_CAL,
+    EDIT_EVENT,
+    EDIT_TODO,
 } edit_t;
 
 /* Config data */

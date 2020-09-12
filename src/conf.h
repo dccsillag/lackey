@@ -17,7 +17,7 @@
 
 /* Handlers */
 typedef void (*parser_t)(const char *group, const char *name,
-		         const char *key, const char *value);
+                 const char *key, const char *value);
 
 /* Getters */
 int get_enum(const char *value, const char **map, int n);
@@ -28,16 +28,16 @@ char *get_name(const char *name);
 
 /* Setters */
 void set_enum(const char *group, const char *name,
-		const char *key, int value,
-		const char **map, int n);
+        const char *key, int value,
+        const char **map, int n);
 void set_bool(const char *group, const char *name,
-		const char *key, int value);
+        const char *key, int value);
 void set_number(const char *group, const char *name,
-		const char *key, int value);
+        const char *key, int value);
 void set_string(const char *group, const char *name,
-		const char *key, const char *value);
+        const char *key, const char *value);
 void set_name(const char *group, const char *name,
-		const char *value);
+        const char *value);
 
 /* Functions */
 void conf_setup(int argc, char **argv, const char *name, parser_t parser);

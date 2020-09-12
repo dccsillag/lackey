@@ -24,25 +24,25 @@
 
 /* Test data */
 static cal_t cal = {
-	.type  = "dummy",
-	.name  = "dummy",
-	.desc  = "dummy calendar",
+    .type  = "dummy",
+    .name  = "dummy",
+    .desc  = "dummy calendar",
 };
 
 static event_t event = {
-	.cal   = &cal,
-	.start = {2012, OCT, 0, 12, 0},
-	.end   = {2012, OCT, 0, 13, 0},
-	.name  = "dummy event",
-	.desc  = "this event is random and does not exist",
+    .cal   = &cal,
+    .start = {2012, OCT, 0, 12, 0},
+    .end   = {2012, OCT, 0, 13, 0},
+    .name  = "dummy event",
+    .desc  = "this event is random and does not exist",
 };
 
 static todo_t todo = {
-	.cal     = &cal,
-	.name    = "dummy todo",
-	.desc    = "this todo is random and does not exist",
-	.due     = {2012, OCT, 0, 13, 0},
-	.status  = 50,
+    .cal     = &cal,
+    .name    = "dummy todo",
+    .desc    = "this todo is random and does not exist",
+    .due     = {2012, OCT, 0, 13, 0},
+    .status  = 50,
 };
 
 static int     enable;
@@ -50,52 +50,52 @@ static int     enable;
 /* Config parser */
 void dummy_config(const char *group, const char *name, const char *key, const char *value)
 {
-	if (match(group, "dummy") && match(key, "enable"))
-		enable = get_bool(value);
+    if (match(group, "dummy") && match(key, "enable"))
+        enable = get_bool(value);
 }
 
 /* Cal functions */
 cal_t *dummy_cals(void)
 {
-	return &cal;
+    return &cal;
 }
 
 /* Event functions */
 event_t *dummy_events(date_t start, date_t end)
 {
-	event_t *last = &event;
-	for (int i = 0; i < 8; i++) {
-		last->next        = new0(event_t);
-		last->next->cal   = event.cal;
-		last->next->start = event.start;
-		last->next->end   = event.end;
-		last->next->name  = strcopy(event.name);
-		last->next->desc  = strcopy(event.desc);
+    event_t *last = &event;
+    for (int i = 0; i < 8; i++) {
+        last->next        = new0(event_t);
+        last->next->cal   = event.cal;
+        last->next->start = event.start;
+        last->next->end   = event.end;
+        last->next->name  = strcopy(event.name);
+        last->next->desc  = strcopy(event.desc);
 
-		date_t *s = &last->next->start;
-		date_t *e = &last->next->end;
-		add_days(&s->year, &s->month, &s->day, 7*i);
-		add_days(&e->year, &e->month, &e->day, 7*i);
+        date_t *s = &last->next->start;
+        date_t *e = &last->next->end;
+        add_days(&s->year, &s->month, &s->day, 7*i);
+        add_days(&e->year, &e->month, &e->day, 7*i);
 
-		last = last->next;
-		last->next = NULL;
-	}
-	return enable ? event.next : 0;
+        last = last->next;
+        last->next = NULL;
+    }
+    return enable ? event.next : 0;
 }
 
 /* Todo functions */
 todo_t *dummy_todos(date_t start, date_t end)
 {
-	todo_t *last = &todo;
-	for (int i = 0; i < 6; i++) {
-		last->next = new0(event_t);
-		last->next->cal    = todo.cal;
-		last->next->name   = strcopy(todo.name);
-		last->next->desc   = strcopy(todo.desc);
-		last->next->due    = todo.due;
-		last->next->status = todo.status;
-		last = last->next;
-		last->next = NULL;
-	}
-	return enable ? todo.next : 0;
+    todo_t *last = &todo;
+    for (int i = 0; i < 6; i++) {
+        last->next = new0(event_t);
+        last->next->cal    = todo.cal;
+        last->next->name   = strcopy(todo.name);
+        last->next->desc   = strcopy(todo.desc);
+        last->next->due    = todo.due;
+        last->next->status = todo.status;
+        last = last->next;
+        last->next = NULL;
+    }
+    return enable ? todo.next : 0;
 }
