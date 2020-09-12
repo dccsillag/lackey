@@ -63,7 +63,7 @@ static void message(FILE *output_fd, const char *prefix, const char *fmt, va_lis
 			mvhline(LINES-2, 0, ACS_HLINE, COLS);
 		move(LINES-1, 0);
 		attron(COLOR_PAIR(COLOR_ERROR) | rev);
-		vwprintw(stdscr, fmt, tmp);
+		vw_printw(stdscr, fmt, tmp);
 		attroff(COLOR_PAIR(COLOR_ERROR) | rev);
 		if (!COMPACT)
 			clrtoeol();
