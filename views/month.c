@@ -138,13 +138,15 @@ int month_run(int key, mmask_t btn, int row, int col)
         case 'l': days   =  1; break;
         case 'i': months = -1; break;
         case 'o': months =  1; break;
+        case 't': SEL = NOW;   break;
+        default:               return 0;
     }
-    if (days || months) {
-        add_days(&SEL.year, &SEL.month, &SEL.day, days);
-        add_months(&SEL.year, &SEL.month, months);
-        werase(win);
-        month_draw();
-        wrefresh(win);
-    }
-    return days || months;
+
+    add_days(&SEL.year, &SEL.month, &SEL.day, days);
+    add_months(&SEL.year, &SEL.month, months);
+    werase(win);
+    month_draw();
+    wrefresh(win);
+
+    return 1;
 }

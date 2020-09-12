@@ -225,6 +225,7 @@ int day_run(int key, mmask_t btn, int row, int col)
         case '\031': lines  = -1; break; // ctrl-y
         case '\005': lines  =  1; break; // ctrl-e
         case '\012': view_edit(EDIT_EVENT); return 1; // enter
+        case 't':    SEL    = NOW; break;
         default:     return 0; // not found
     }
 
@@ -236,5 +237,6 @@ int day_run(int key, mmask_t btn, int row, int col)
     werase(win);
     day_draw();
     wrefresh(win);
+
     return 1;
 }

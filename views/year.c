@@ -171,11 +171,18 @@ int year_run(int key, mmask_t btn, int row, int col)
         }
     }
 
+    /* Go to today */
+    if (key == 't') {
+        SEL = NOW;
+        dir = 1; // so that we report the key as handled
+    }
+
     /* Refresh */
     if (dir || y != SEL.year) {
         werase(win);
         year_draw();
         wrefresh(win);
     }
+
     return dir || y != SEL.year;
 }
