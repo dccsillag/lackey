@@ -15,9 +15,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#define _XOPEN_SOURCE
-#define _XOPEN_SOURCE_EXTENDED
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
