@@ -364,7 +364,7 @@ int view_run(int key, mmask_t btn, int row, int col)
     }
 
     /* Shift windows with left/right keys */
-    int shift = key == KEY_RIGHT ? +1 :
+    int shift = (key == KEY_RIGHT || key == '\t') ? +1 :
             key == KEY_LEFT  ? -1 : 0;
     if (shift) {
         int num = 0;
