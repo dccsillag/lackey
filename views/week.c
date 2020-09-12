@@ -83,10 +83,13 @@ void week_draw(void)
     wattron(win, rev);
     for (int d = 0; d < 7; d++) {
         const char *str = hstep >= 10 ? day_to_string(d) : day_to_str(d);
-        if (d == shift) wattrset(win, A_BOLD);
+        int is_today = year == NOW.year && month == NOW.month && day == NOW.day;
+        // FIXME: this doesn't look that good on compact layout.
+        int attr = (d == shift ? A_BOLD : 0) | (is_today ? A_STANDOUT : 0);
+        if (attr) wattrset(win, attr);
         mvwprintw(win, 0, x+ROUND(d*hstep), "%s", str);
         mvwprintw(win, 1, x+ROUND(d*hstep), "%02d/%02d", month+1, day+1);
-        if (d == shift) wattrset(win, rev);
+        if (d == shift || is_today) wattrset(win, rev);
         add_days(&year, &month, &day, 1);
     }
     wattroff(win, rev);

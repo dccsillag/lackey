@@ -68,9 +68,13 @@ void month_draw(void)
     for (int d = 0; d < days; d++) {
         int row = (start + d) / 7;
         int col = (start + d) % 7;
-        if (d == SEL.day) wattron(win, A_BOLD);
+        int is_selected = d == SEL.day;
+        int is_today = SEL.year == NOW.year && SEL.month == NOW.month && d == NOW.day;
+        if (is_selected) wattron(win, A_BOLD);
+        if (is_today)    wattron(win, A_STANDOUT);
         mvwprintw(win, ROUND(hdr+row*vstep), ROUND(1+col*hstep), "%d", d+1);
-        if (d == SEL.day) wattroff(win, A_BOLD);
+        if (is_selected) wattroff(win, A_BOLD);
+        if (is_today)    wattroff(win, A_STANDOUT);
     }
 
     /* Print events */

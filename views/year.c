@@ -51,10 +51,12 @@ static void print_month(month_t month, int y, int x)
             event = event->next;
         }
 
-        int today = month == SEL.month && d == SEL.day;
+        int is_selected = month == SEL.month && d == SEL.day;
+        int is_today = SEL.year == NOW.year && month == NOW.month && d == NOW.day;
 
-        int attr  = (busy  ? A_BOLD|A_UNDERLINE : A_DIM)
-                  | (today ? A_REVERSE          : 0    );
+        int attr  = (busy        ? A_UNDERLINE : A_DIM)
+                  | (is_selected ? A_REVERSE   : 0    )
+                  | (is_today    ? A_BOLD      : 0    );
 
         wattron(win, attr);
         mvwprintw(win, y+2+row, x+col*3, "%2d", d+1);
