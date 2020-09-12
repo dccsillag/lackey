@@ -43,6 +43,9 @@ static const char *timestr(date_t date)
 /* Event editing */
 static void draw_event(event_t *event)
 {
+    if (!event)
+        return;
+
     wmove(win, 0, 0);
     wprintw(win, "Edit Event\n");
     wprintw(win, "    Name:        %s\n",  event->name      ?: "[none]");
@@ -62,6 +65,9 @@ static int edit_event(event_t *event, int key, mmask_t btn, int row, int col)
 /* Todo editing */
 static void draw_todo(todo_t *todo)
 {
+    if (!todo)
+        return;
+
     wmove(win, 0, 0);
     wprintw(win, "Edit Todo\n");
     wprintw(win, "    Name:        %s\n",   todo->name      ?: "[none]");
