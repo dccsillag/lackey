@@ -10,7 +10,7 @@ MANPREFIX ?= $(PREFIX)/share/man
 
 # Compiler
 GCC       ?= gcc
-CFLAGS    ?= -Wall --std=c99
+CFLAGS    ?= -Wall --std=c99 -g
 CPPFLAGS  ?= -Isrc
 LDFLAGS   ?= -lncursesw -lical
 
