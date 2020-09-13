@@ -75,7 +75,7 @@ int main(int argc, char **argv)
     init_pair(COLOR_OTHER, COLOR_RED,     -1);
 
     /* Configuration */
-    conf_setup(argc, argv, ".lackeyrc", on_config);
+    conf_setup(argc, argv, ".lackeyrc", ".config/lackey/lackeyrc", on_config);
 
     /* Initialize */
     util_init();

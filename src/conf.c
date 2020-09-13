@@ -20,6 +20,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <errno.h>
+#include <unistd.h>
 
 #include "util.h"
 #include "conf.h"
@@ -316,14 +317,21 @@ void conf_save(const char *path)
 }
 
 /* Initialize */
-void conf_setup(int _argc, char **_argv, const char *_name, parser_t _parser)
+void conf_setup(int _argc, char **_argv, const char *_name, const char *_altname, parser_t _parser)
 {
     const char *home = getenv("HOME");
     filename = alloc0(strlen(home) + 1 + strlen(_name) + 1);
     sprintf(filename, "%s/%s", home, _name);
-    parser   = _parser;
-    argc     = _argc;
-    argv     = _argv;
+    if (access(filename, F_OK) == -1) { /* file does not exist */
+        char *filename2 = alloc0(strlen(home) + 1 + strlen(_altname) + 1);
+        sprintf(filename2, "%s/%s", home, _altname);
+        if (access(filename2, F_OK) != -1) /* file exists */
+            filename = filename2;
+
+    }
+    parser = _parser;
+    argc   = _argc;
+    argv   = _argv;
 }
 
 /* Initialize */

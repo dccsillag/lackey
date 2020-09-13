@@ -43,7 +43,7 @@ void set_name(const char *group, const char *name,
         const char *value);
 
 /* Functions */
-void conf_setup(int argc, char **argv, const char *name, parser_t parser);
+void conf_setup(int argc, char **argv, const char *name, const char *altname, parser_t parser);
 void conf_init(void);
 void conf_sync(void);
 
