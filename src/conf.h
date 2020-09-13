@@ -15,6 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifndef CONF_H
+#define CONF_H
+
 /* Handlers */
 typedef void (*parser_t)(const char *group, const char *name,
                  const char *key, const char *value);
@@ -43,3 +46,5 @@ void set_name(const char *group, const char *name,
 void conf_setup(int argc, char **argv, const char *name, parser_t parser);
 void conf_init(void);
 void conf_sync(void);
+
+#endif

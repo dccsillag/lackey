@@ -15,6 +15,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifndef VIEW_H
+#define VIEW_H
+
+#include <ncurses.h>
+#include "cal.h"
+
 /* Configuration */
 #define COLOR_TITLE 1
 #define COLOR_ERROR 2
@@ -63,3 +69,5 @@ void view_resize(void);
 void view_draw(void);
 int  view_run(int key, mmask_t btn, int row, int col);
 void view_edit(edit_t mode);
+
+#endif

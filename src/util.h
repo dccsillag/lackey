@@ -15,6 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifndef UTIL_H
+#define UTIL_H
+
 /* Macros */
 #define ABS(a)   ((a) > 0 ? (a) : -(a))
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
@@ -42,3 +45,5 @@ char *read_file(const char *path, int *len);
 /* Debug functions */
 void debug(char *fmt, ...);
 void error(char *fmt, ...);
+
+#endif

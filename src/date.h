@@ -15,6 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifndef DATE_H
+#define DATE_H
+
 /* Time types */
 typedef long long stamp_t;
 
@@ -92,3 +95,5 @@ const char *month_to_string(month_t month);
 const char *day_to_st(wday_t day);
 const char *day_to_str(wday_t day);
 const char *day_to_string(wday_t day);
+
+#endif

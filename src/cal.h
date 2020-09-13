@@ -15,6 +15,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifndef CAL_H
+#define CAL_H
+
+#include "date.h"
+
+
 /* Cal status types */
 typedef enum {
     NEW  = 0,
@@ -66,3 +72,5 @@ void cal_config(const char *group, const char *name, const char *key, const char
 
 /* Event functions */
 event_t *find_event(date_t *target);
+
+#endif
