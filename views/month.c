@@ -129,16 +129,18 @@ void month_draw(void)
 /* Month run */
 int month_run(int key, mmask_t btn, int row, int col)
 {
+    wday_t weekday = day_of_week(SEL.year, SEL.month, SEL.day);
+
     int days = 0, months = 0;
     switch (key)
     {
-        case 'h': days   = -1; break;
-        case 'j': days   =  7; break;
-        case 'k': days   = -7; break;
-        case 'l': days   =  1; break;
-        case 'i': months = -1; break;
-        case 'o': months =  1; break;
-        case 't': SEL = NOW;   break;
+        case 'h': days   = weekday > 0 ? -1 : 0; break;
+        case 'j': days   =  7;                   break;
+        case 'k': days   = -7;                   break;
+        case 'l': days   = weekday < 6 ?  1 : 0; break;
+        case 'i': months = -1;                   break;
+        case 'o': months =  1;                   break;
+        case 't': SEL = NOW;                     break;
         default:               return 0;
     }
 
